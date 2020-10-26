@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        #page_top{
+            text-align: center;
+        }
+        #nav_bar{
+            padding-left:40px;
+            margin:0px;
+            background-color:#18354c;
+            height: 50px;
+            padding-top: 20px;
+            box-shadow:0px 3px 2px lightblue;
+        }
+        #nav_el{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:#eeeeee;
+            z-index: 1;
+            padding:1em;
+            margin:-1em;
+            text-decoration: none;
+            margin:0px 2% 0px 2%;
+            background-color: #18354c;
+            width:70%;
+            text-align: center;
+            font-size: larger;
+        }
+        #nav_el:link{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:visited{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:hover{
+            color:#eeeeee;
+            background-color: #1b5381;
+        }
+        #login_a{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            margin:0px 20px 0px 0px;
+            float: right;;
+            background-color: #ffb006;
+            color:rgb(43, 42, 42);
+            font-size: large;
+            border-radius: 3px;
+            padding:10px 20px 10px 20px;
+            box-shadow:0px 5px 0px #a06e03;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        #login_a:hover{
+            background-color: #fcbd36;
+            margin-bottom: 5px;
+            margin-top:0px;
+            }
+        #blank_box{
+            padding-top:20px;
+            margin-right: 10%;
+            background-color:#997d42;
+            width: 80% ;
+            margin-left:10%;
+            height: 40%;
+            clear:both;
+            box-shadow: black 2px 2px 4px;
+            border-radius: 20px;
+            
+        }
+        #login_style{
+            margin:10px 30% 30px 30%;
+            padding:10px 20px 20px 20px;
+            border-radius: 6px;
+            border:1px solid rgb(202, 202, 202);
+        }
+        body{
+            background-color: whitesmoke;
+            margin:0px;
+        }
+        #form_elm{
+            margin:10px 5px 5px 20px;
+        }
+        #fake_login_elm{
+            margin:40px 30% 10px 30%;
+            padding:10px 20px 20px 20px;
+            font-size:40px;
+        }
+        #register_area{
+            margin:40px 30% 30px 30%;
+            padding:10px 20px 20px 20px;
+        }
+        #register_link{
+            text-decoration: none;
+            color: rgb(43, 42, 42);
+            border-radius: 3px;
+            padding:5px;
+            border:1px solid rgb(78, 78, 78);
+        }
+    </style>
+    
+    <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
+</head>
+<body>
+    <nav id="nav_bar">
+        <a id="nav_el" href="/site">Home</a>
+        <a id="nav_el" href="/site/projects">Projects</a>
+        <a id="nav_el" href="/site/personal">Me</a>
+        <a id="nav_el" href="/site/blog">Blog</a>
+        <a id="nav_el" href="/site/comments">Comments</a>
+        <a id="login_a" href="/site/login_page">Join</a>
+    </nav>
+    <h1 id="fake_login_elm">Create Account</h1>
+    <div id="login_style">
+        <form method="POST" action="" >{% csrf_token%}
+            <label id="form_elm" for="username_input">Username</label><br>
+            <input type="text" id="form_elm" name="username_input"><br>
+            {%if username_correct == "1" %}
+            <p style="color:green;margin:5px 10px 5px 20px;">Username Valid</p>
+            {% elif username_correct == "0" %}
+            <p style="color:red;margin:5px 10px 5px 20px;">Username Invalid</p>
+            {% endif %}
+
+            <label id="form_elm" for="email_input">Email</label><br>
+            <input id="form_elm"name="email_input" type="text">
+            {% if email_correct == "1" %}
+            <p style="color:green;font-style:DejaVu Sans Mono;margin:5px 10px 5px 20px;">Email valid</p>
+            {% elif email_correct == "0" %}
+            <p style="color:red;font-style:DejaVu Sans Mono;margin:5px 10px 5px 20px;">Email invalid</p>
+            {%endif%}
+            <br>
+            
+            <label id="form_elm" style="margin:1px 0px 0px 20px;" for="password_input">Password</label><br>{% csrf_token%}
+            <input id="form_elm" name="password_input" type="password"><br>
+            {%if password_correct == "0" %}
+                <p style="color: red;margin:5px 10px 5px 20px;">Password has to be longer than 7 characters!</p>
+            {%elif password_correct == "1" %}
+                <p style="color: green;margin:5px 10px 5px 20px;">Password valid</p>{% csrf_token%}
+            {% endif%}
+            <input id="form_elm" type="submit" value="Create Account">{% csrf_token%}
+            {%if account_created%}
+            <p>Your account has been created successfully!</p>{% csrf_token%}
+            {% endif %}
+            
+        </form>
+
+    </div>
+    {%if user.is_authenticated%}
+    <h2 style="color:rebeccapurple;" >You are authenticated!</h2>
+    {% endif %}
+</body>
+
+</html>

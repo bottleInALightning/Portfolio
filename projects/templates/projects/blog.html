@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio</title>
+    <style>
+        #page_top{
+            text-align: center;
+        }
+        #nav_bar{
+            padding-left:40px;
+            margin:0px;
+            background-color:#18354c;
+            height: 50px;
+            padding-top: 20px;
+            box-shadow:0px 3px 2px lightblue;
+        }
+        #nav_el{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:#eeeeee;
+            z-index: 1;
+            padding:1em;
+            margin:-1em;
+            text-decoration: none;
+            margin:0px 2% 0px 2%;
+            background-color: #18354c;
+            width:70%;
+            text-align: center;
+            font-size: larger;
+        }
+        #nav_el:link{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:visited{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:hover{
+            color:#eeeeee;
+            background-color: #1b5381;
+        }
+        #login_a{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            margin:0px 20px 0px 0px;
+            float: right;;
+            background-color: #ffb006;
+            color:rgb(43, 42, 42);
+            font-size: large;
+            border-radius: 3px;
+            padding:10px 20px 10px 20px;
+            box-shadow:0px 5px 0px #a06e03;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        #login_a:hover{
+            background-color: #fcbd36;
+            margin-bottom: 5px;
+            margin-top:0px;
+            }
+       
+
+
+        #blank_box{
+            padding-top:20px;
+            margin-right: 10%;
+            background-color:#997d42;
+            width: 80% ;
+            margin-left:10%;
+            height: 40%;
+            clear:both;
+            box-shadow: black 2px 2px 4px;
+            border-radius: 20px;
+            
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+    <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
+</head>
+<body style = "background-color:whitesmoke;margin:0px;">
+    <nav id="nav_bar">
+        <a id="nav_el" href="/site">Home</a>
+        <a id="nav_el" href="/site/projects">Projects</a>
+        <a id="nav_el" href="/site/personal">Me</a>
+        <a id="nav_el" href="/site/blog">Blog</a>
+        <a id="nav_el" href="/site/comments">Comments</a>
+        <a id="login_a" href="/site/login_page">Join</a>
+    </nav>
+   <div id="page_top">
+    <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Blog posts</h1> 
+    <p>Here I will publish updates on projects and other stuff</p>
+    
+   </div>
+   
+</body>
+</html>

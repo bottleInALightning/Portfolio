@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio</title>
+    <style>
+        #page_top{
+            text-align: center;
+        }
+        #nav_bar{
+            padding-left:40px;
+            margin:0px;
+            background-color:#18354c;
+            height: 50px;
+            padding-top: 20px;
+            box-shadow:0px 3px 2px lightblue;
+        }
+        #nav_el{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:#eeeeee;
+            z-index: 1;
+            padding:1em;
+            margin:-1em;
+            text-decoration: none;
+            margin:0px 2% 0px 2%;
+            background-color: #18354c;
+            width:70%;
+            text-align: center;
+            font-size: larger;
+        }
+        #nav_el:link{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:visited{
+            color:#eeeeee;
+            background-color: #18354c;
+        }
+        #nav_el:hover{
+            color:#eeeeee;
+            background-color: #1b5381;
+        }
+        #login_a{
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            margin:0px 20px 0px 0px;
+            float: right;;
+            background-color: #ffb006;
+            color:rgb(43, 42, 42);
+            font-size: large;
+            border-radius: 3px;
+            padding:10px 20px 10px 20px;
+            box-shadow:0px 5px 0px #a06e03;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        #login_a:hover{
+            background-color: #fcbd36;
+            margin-bottom: 5px;
+            margin-top:0px;
+            }
+       
+
+
+        #blank_box{
+            padding-top:20px;
+            margin-right: 10%;
+            background-color:#997d42;
+            width: 80% ;
+            margin-left:10%;
+            height: 40%;
+            clear:both;
+            box-shadow: black 2px 2px 4px;
+            border-radius: 20px;
+            
+        }
+        #projects{
+            margin:5% 10% 5% 10%;
+            padding:1% 1% 1% 1%;
+            border:grey solid 1px;
+            border-radius: 10px;
+            background-color: rgb(230, 230, 230);
+        }
+        .project_el{
+            margin-bottom:2%;
+            border:rgb(128, 128, 128) solid 1px;
+            border-radius: 3px;
+            background-color: rgb(245, 255, 104);
+            padding:10px 10px 10px 10px;
+            
+        }
+        
+    </style>
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+    <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
+</head>
+<body style = "background-color:whitesmoke;margin:0px;">
+    <nav id="nav_bar">
+        <a id="nav_el" href="/site">Home</a>
+        <a id="nav_el" href="/site/projects">Projects</a>
+        <a id="nav_el" href="/site/personal">Me</a>
+        <a id="nav_el" href="/site/blog">Blog</a>
+        <a id="nav_el" href="/site/comments">Comments</a>
+        <a id="login_a" href="/site/login_page">Join</a>
+    </nav>
+   <div id="page_top">
+    <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Projects</h1> 
+    <p>Here you will see my amazing pygame, django and other projects.</p>
+    
+    
+   </div>
+   <div id="projects">
+        <a style="text-decoration: none; color:black;" href="https://github.com/bottleInALightning/GameOfLife">
+            <div id="proj1" class="project_el">
+                <img src="https://i.ibb.co/7n4SDX7/Kazam-screenshot-00000.png" width="80" height="80" style="border:black solid 1px;">
+                <h1 style=" margin-left:10px; margin-top:5px;padding-top:5px;display: inline-block; vertical-align: top;">The Game of Life</h1>
+                <p style="font-size:20px;">This is my version of Conway's Game of Life</p>
+            </div>
+        </a>
+        <a href="https://github.com/bottleInALightning/Random-Quote-Website" style="text-decoration: none; color:black;">
+            <div class="project_el">
+                <img src="https://i.ibb.co/TL6DRZj/quotes-website.png" width="300" height="150" style="border:black solid 1px;">
+                <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Random Quotes Website</h1>
+                <p>This website, programmed in Django, serves you a fresh random quote with every click of a button. </p>
+                <p>It first scrapes data from 'quotes.toscrape.com' and then randomly picks one and parses it into a custom html template.</p>
+            </div>
+        </a>
+        <a href="https://github.com/bottleInALightning/Blocky" style="text-decoration: none; color:black;">
+            <div class="project_el">
+                <img src="https://i.ibb.co/WpCPfbq/Kazam-screenshot-00001.png" width="300" height="150" style="border:black solid 1px;">
+                <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Blocky</h1>
+                <p>A game where you control a square snaking around the screen with either commands or wasd.</p>
+                <p><b>Challenge:</b> Beat the every Level with the same set of instructions!</p>
+            </div> 
+        </a>
+
+        <a href="https://github.com/bottleInALightning/pyWeek30" style="text-decoration: none; color:black;">
+            <div class="project_el">
+                <img src="https://i.ibb.co/hfDJzy7/Cast-A-knife.png" width="200" height="150" style="border:black solid 1px;">
+                <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Cast A Knife</h1>
+                <p>This is a game made with pygame for pyweek</p>
+                <p>You as the hero have to kill all the bugs and then find the trophy.</p>
+            </div>
+        </a>
+
+        <a href="https://github.com/bottleInALightning/RockPaperScissors" style="text-decoration: none; color:black;">
+            <div class="project_el">
+                <img src="https://i.ibb.co/nRpRFwx/rock-paper-scissors.png" width="200" height="150" style="border:black solid 1px;">
+                <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Rock Paper Scissors</h1>
+                <p>A small game I had a lot of fun doing (especially drawing)</p>
+                <p>Done a long time ago though but has a cool, sneaky feature.</p>
+            </div>
+        </a>
+
+
+   </div>
+</body>
+</html>
