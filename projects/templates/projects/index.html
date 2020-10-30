@@ -9,6 +9,10 @@
             text-align: center;
         }
         #nav_bar{
+            position:fixed;
+            top:0;
+            width:100%;
+
             padding-left:40px;
             margin:0px;
             background-color:#18354c;
@@ -44,12 +48,15 @@
             color:#eeeeee;
             background-color: #1b5381;
         }
+        #page_contents{
+            margin-top:100px;
+        }
         #login_a{
             -webkit-user-select: none; /* Safari */        
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard */
-            margin:0px 20px 0px 0px;
+            margin:0px 70px 0px 0px;
             float: right;;
             background-color: #ffb006;
             color:rgb(43, 42, 42);
@@ -80,15 +87,8 @@
             border-radius: 20px;
             
         }
-        #text_part p{
-            color:rgb(32, 29, 29);
-        }
-        #text_part{
-            margin:10px 10% 10px 10%;
-            background-color: rgb(209, 209, 209);
-            border:black solid 2px;
-            border-radius: 4px;
-        }
+        
+        
     </style>
     <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
     <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
@@ -97,21 +97,26 @@
     <nav id="nav_bar">
         <a id="nav_el" href="/site">Home</a>
         <a id="nav_el" href="/site/projects">Projects</a>
-        <a id="nav_el" href="/site/personal">Me</a>
         <a id="nav_el" href="/site/blog">Blog</a>
         <a id="nav_el" href="/site/comments">Comments</a>
         <a id="login_a" href="/site/login_page">Join</a>
     </nav>
+    <div id="page_contents">
    <div id="page_top">
-    <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Home page</h1> 
-    <div id="text_part">
-        <p>I hope this website gives you some inspiring content and maybe you even learn something new here.</p>
-        <p>It was started out to improve my own python django skills but I didn't want to just lose it in some arbitary folder on my laptop</p>
-        <p>and I will host it on my raspberry pi and hope to grow a small community here.</p><br>
-        <p>There is still a lot to do though.</p>
-        <p>Finishing the "Blog" and "Projects" sites and css'ing the comments just to name a few</p>
-    </div>
+    <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Home</h1>
+     
+    
+    <p style="white-space: pre-line;">
+        This website is extremely cool. end. now look at
+        my projects
+
+        Any suggestions on what to put here?
+        Like a video of a project or sth ?
+    </p>
+
+
+    <img src="https://i.ibb.co/tDcZdR2/python-logo.png" alt="Python logo">
    </div>
-   
+</div>
 </body>
 </html>

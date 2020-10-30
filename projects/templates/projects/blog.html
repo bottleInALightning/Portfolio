@@ -9,6 +9,10 @@
             text-align: center;
         }
         #nav_bar{
+            position:fixed;
+            top:0;
+            width:100%;
+
             padding-left:40px;
             margin:0px;
             background-color:#18354c;
@@ -49,7 +53,7 @@
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard */
-            margin:0px 20px 0px 0px;
+            margin:0px 70px 0px 0px;
             float: right;;
             background-color: #ffb006;
             color:rgb(43, 42, 42);
@@ -80,6 +84,33 @@
             border-radius: 20px;
             
         }
+        #form_elm{
+            float:center;
+        }
+        
+        #posts{
+            
+            margin:3%;
+            padding:2%;
+            
+        }
+        #blogpost{
+            padding:3% 1% 1% 2%;
+            margin:2% 1% 1% 1%;
+            background-color: rgb(140, 157, 255);
+            border-radius: 10px;
+            box-shadow:7px 7px 1px #2087fc;
+
+        }
+        #page_contents{
+            margin-top:100px;
+        }
+        #create_post{
+            margin:3%;
+            padding:2%;
+            border:black solid 2px;
+            border-radius:10px;
+        }
     </style>
     <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
     <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
@@ -88,16 +119,53 @@
     <nav id="nav_bar">
         <a id="nav_el" href="/site">Home</a>
         <a id="nav_el" href="/site/projects">Projects</a>
-        <a id="nav_el" href="/site/personal">Me</a>
         <a id="nav_el" href="/site/blog">Blog</a>
         <a id="nav_el" href="/site/comments">Comments</a>
         <a id="login_a" href="/site/login_page">Join</a>
     </nav>
-   <div id="page_top">
-    <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Blog posts</h1> 
-    <p>Here I will publish updates on projects and other stuff</p>
-    
-   </div>
-   
+    <div id="page_contents">
+    <div id="page_top">
+        <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Blog posts</h1> 
+        <p>Here I will publish updates on projects and other stuff</p>
+        
+    </div>
+    <div id="posts">
+        {% for blog in blogs%}
+            <div id="blogpost">
+                <h2 style="font-size:50px;shadow:black 2px 2px; margin-left:2%; color: #E56060;" >{{ blog.title }}</h2>
+                <p style="font-size: 10;display: inline-block;float: right;;">{{blog.pub_date}}</p>
+                <div style="border:#5a5a5a solid 3px;width:80%;margin-left:2%;margin-top:3%; margin-bottom:2%;"></div>
+                <img style="border:black solid 2px;margin-left:2%;" src="{{blog.img_link}}" alt="">
+                <span style="white-space: pre-line;font-size: 20px; margin-left:1%; margin-top:1%; display:inline-block">{{ blog.text_content }}</span>
+                {% if request.user.is_staff%}
+                <form action="" method="POST"> {% csrf_token %}
+                    <input type="hidden" name="delete_blog_id" value="{{blog.primary_key}}">
+                    <input type="submit" name="delete_button" value="delete">
+
+                </form>
+                {% endif %}
+            </div>
+        
+        {% endfor %}
+        
+        </div>
+
+        {% if request.user.is_staff%}
+        <div id="create_post">
+            <form action="" method="POST">{% csrf_token %}
+                <label id="form_elm" for="img_link">Link to image:</label><br>
+                <input id="form_elm" name="img_link" type="text" ><br>
+                
+                <label id="form_elm" for="title">Title</label><br>
+                <input id="form_elm" name="title" type="type"><br>
+
+                <label id="form_elm" for="contents">Text</label><br>
+                <textarea id="form_elm" name="contents" id="" cols="30" rows="10">Type here ...</textarea><br><br>
+
+                <input id="form_elm" type="submit" value="Publish"><br>
+            </form>
+        </div>
+        {% endif  %}
+    </div>
 </body>
 </html>

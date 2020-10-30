@@ -126,6 +126,8 @@
             <p style="color:green;margin:5px 10px 5px 20px;">Username Valid</p>
             {% elif username_correct == "0" %}
             <p style="color:red;margin:5px 10px 5px 20px;">Username Invalid</p>
+            {% elif username_correct == "4"%}
+            <p style="color:red;margin:5px 10px 5px 20px;">Username Taken</p>
             {% endif %}
 
             <label id="form_elm" for="email_input">Email</label><br>

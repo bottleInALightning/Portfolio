@@ -133,7 +133,9 @@
             <input id="form_elm" type="submit" value="Login">
             
         </form>
-
+        {% if wrong_input%} 
+            <b>Invalid Account data!</b>
+        {% endif %}
     </div>
     <div id="register_area">
         <p>New to this site?</p>

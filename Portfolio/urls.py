@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.http import HttpResponse,HttpResponseRedirect
 
 import projects 
 
+
+def red_to_index(request):
+    return HttpResponseRedirect("/site/")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("site/",include("projects.urls")),
+    path("",red_to_index)
 ]

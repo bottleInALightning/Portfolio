@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 import re
-from .models import CommentField
+from .models import CommentField,BlogPost
 from django.utils import timezone
 # Create your views here.
 
@@ -17,7 +17,31 @@ def projects(request):
 def personal(request):
     return render(request,"projects/personal.html")
 def blog(request):
-    return render(request,"projects/blog.html")
+    
+    
+    if request.method=="POST":
+        print(request.POST)
+        try:
+            if request.POST["contents"] and request.POST["title"]:
+                post=BlogPost(pub_date=timezone.now(),text_content=request.POST["contents"],author=request.user.username,author_id=request.user.id,title=request.POST["title"],img_link=request.POST["img_link"])
+                post.save()
+                return HttpResponseRedirect("/site/blog")
+            
+        except  Exception as e:
+            print(e)
+        
+        try:
+            if request.POST["delete_button"]:
+                print("DElete blog with Id:",request.POST["delete_blog_id"])
+                BlogPost.objects.filter(primary_key=request.POST["delete_blog_id"]).delete()
+                return HttpResponseRedirect("")
+        except Exception as e:
+            print(e)
+    blogs=reversed(BlogPost.objects.all())
+    return render(request,"projects/blog.html",{"blogs":blogs})
+
+
+
 def comment(request):
     if request.method=="POST":
         print("Post request:",request.POST)
@@ -31,16 +55,19 @@ def comment(request):
             print("Error:",e)
         try:
             if request.POST["delete_comment"]:
+                print("Delete button clicked!")
                 if request.POST["comment_id"]:#{%if request.user.is_staff or comment.author_id == request.user.primary_key %}
-
+                    
                     CommentField.objects.filter(primary_key=request.POST["comment_id"]).delete()
-                    return HttpResponseRedirect("/site/comments/")
+                    #return HttpResponseRedirect("/site/comments/")
         except Exception as e:
             print("Error:",e)
+    
     comments=CommentField.objects.all()
     return render(request,"projects/comments.html",{"comments":reversed(comments)})
 
 def login_page(request):
+    wrong_input=False
     if request.method=="POST":
         print("user active:",request.user.is_active)
         
@@ -49,10 +76,11 @@ def login_page(request):
         user=authenticate(password=password,username=username)
         if user !=None:
             login(request,user)
+        wrong_input=False
         if not request.user.is_active:
-            return HttpResponse('<p>Your account is disabled, contact</p><a href="mailto:lightningbottle@protonmail.com?subject=Account deactivation complains"<p>To tell us why you think your account shouldn\'t be deactivated.')
+            wrong_input=True
 
-    return render(request,"projects/login.html",{})
+    return render(request,"projects/login.html",{"wrong_input":wrong_input})
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect("/site/")
@@ -84,8 +112,11 @@ def register(request):
             password_correct=2
         if request.POST["username_input"]:
             if 3<len(request.POST["username_input"])<25:
-                username_ok=1
-                username=request.POST["username_input"]
+                if not User.objects.filter(username=request.POST["username_input"]):
+                    username_ok=1
+                    username=request.POST["username_input"]
+                else:
+                    username_ok=4
             else:
                 username_ok=0
                 print("invalid input")
@@ -100,5 +131,6 @@ def register(request):
         print(user)
         if user != None:
             login(request,user)
+        return HttpResponseRedirect("/site/")
     contexts={"email_correct":str(email_correct),"password_correct":str(password_correct),"username_correct":str(username_ok),"account_created":account_created}
     return render(request,"projects/register.html",contexts)
