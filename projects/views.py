@@ -23,7 +23,13 @@ def blog(request):
         print(request.POST)
         try:
             if request.POST["contents"] and request.POST["title"]:
-                post=BlogPost(pub_date=timezone.now(),text_content=request.POST["contents"],author=request.user.username,author_id=request.user.id,title=request.POST["title"],img_link=request.POST["img_link"])
+                img_w=300
+                img_h=200
+                if request.POST["image_width"]:
+                    img_w=int(request.POST["image_width"])
+                if request.POST["image_height"]:
+                    img_h=int(request.POST["image_height"])
+                post=BlogPost(pub_date=timezone.now(),text_content=request.POST["contents"],author=request.user.username,author_id=request.user.id,title=request.POST["title"],img_link=request.POST["img_link"],img_height=img_h,img_width=img_w)
                 post.save()
                 return HttpResponseRedirect("/site/blog")
             

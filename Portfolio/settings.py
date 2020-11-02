@@ -25,7 +25,7 @@ SECRET_KEY = 'hcmi_4-f7ls77-mf&ud+$c#sz)1j1at--av$c%bedv*&f9t-k#axzk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0","217.80.241.170","larsprofile.zapto.org","192.168.2.117","217.80.251.202"]
+ALLOWED_HOSTS = ["0.0.0.0","217.80.241.170","larsprofile.zapto.org","lightningbottle.hopto.org","217.225.45.79","192.168.2.117","217.80.251.202"]
 
 
 # Application definition

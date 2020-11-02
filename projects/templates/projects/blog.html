@@ -135,7 +135,9 @@
                 <h2 style="font-size:50px;shadow:black 2px 2px; margin-left:2%; color: #E56060;" >{{ blog.title }}</h2>
                 <p style="font-size: 10;display: inline-block;float: right;;">{{blog.pub_date}}</p>
                 <div style="border:#5a5a5a solid 3px;width:80%;margin-left:2%;margin-top:3%; margin-bottom:2%;"></div>
-                <img style="border:black solid 2px;margin-left:2%;" src="{{blog.img_link}}" alt="">
+                {% if blog.img_link %}
+                <img style="border:black solid 2px;margin-left:2%;" width="{{blog.img_width}}" height="{{blog.image_height}}" src="{{blog.img_link}}" alt="">
+                {% endif %}
                 <span style="white-space: pre-line;font-size: 20px; margin-left:1%; margin-top:1%; display:inline-block">{{ blog.text_content }}</span>
                 {% if request.user.is_staff%}
                 <form action="" method="POST"> {% csrf_token %}
@@ -153,9 +155,16 @@
         {% if request.user.is_staff%}
         <div id="create_post">
             <form action="" method="POST">{% csrf_token %}
-                <label id="form_elm" for="img_link">Link to image:</label><br>
-                <input id="form_elm" name="img_link" type="text" ><br>
+                <label id="form_elm" for="img_link">Link to image:</label>
+                <label style="margin-left: 130px;" for="image_width">width</label>
+                <label style="margin-left: 20px;" for="image_height">height</label><br>
+
                 
+                <input id="form_elm" name="img_link" type="text" >
+                <input style="width:50px;" type="text" name="image_width" id="">
+                <input style="width:50px;" type="text" name="image_height" id=""><br>
+                
+                <a target="_blank" href="https://imgbb.com/">Get link from image</a><br>
                 <label id="form_elm" for="title">Title</label><br>
                 <input id="form_elm" name="title" type="type"><br>
 

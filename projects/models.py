@@ -25,6 +25,9 @@ class BlogPost(models.Model):
     pub_date=models.DateTimeField(verbose_name="Published Date")
     title=models.TextField(verbose_name="Title")
     img_link=models.TextField(verbose_name="img link")#have to include the "None" option
+    img_width=models.IntegerField(verbose_name="image widht",default=300)
+    img_height=models.IntegerField(verbose_name="image heigth",default=200)
+
     text_content=models.TextField(verbose_name="text_content")
     author=models.CharField(verbose_name="Author",max_length=30)#maybemakecommentonthisbutton,thathaslike@new_stuffblablaincommentsection
     author_id=models.IntegerField(verbose_name="Author id")
