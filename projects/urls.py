@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
+    #path("register/email_auth",views.register_email_auth),
     path("projects/",views.projects),
     path("blog/",views.blog),
     path("comments/",views.comment),

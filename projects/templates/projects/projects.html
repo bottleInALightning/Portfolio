@@ -95,7 +95,7 @@
             margin-bottom:2%;
             border:rgb(128, 128, 128) solid 1px;
             border-radius: 3px;
-            background-color: rgb(245, 255, 104);
+            background-color: rgb(231, 223, 110);
             padding:10px 10px 10px 10px;
             
         }
@@ -106,9 +106,11 @@
             font-size: 20px;
             color:black;
         }
+        .label_style{
+            margin:4px 10px 0px 0px;
+        }
     </style>
-    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
-    <link rel="icon" href="https://i.ibb.co/thwzQZP/logo-porfolio.png" type="image/x-icon" />
+    
 </head>
 <body style = "background-color:whitesmoke;margin:0px;">
     <nav id="nav_bar">
@@ -126,58 +128,50 @@
         
     </div>
     <div id="projects">
-            <a style="text-decoration: none; color:black;" href="https://github.com/bottleInALightning/GameOfLife">
-                <div id="proj1" class="project_el">
-                    <img src="https://i.ibb.co/7n4SDX7/Kazam-screenshot-00000.png" width="80" height="80" style="border:black solid 1px;">
-                    <h1 style=" margin-left:10px; margin-top:5px;padding-top:5px;display: inline-block; vertical-align: top;">The Game of Life</h1>
-                    <p style="font-size:20px;">This is my version of Conway's Game of Life</p>
-                </div>
-            </a>
-            <a href="https://github.com/bottleInALightning/Random-Quote-Website" style="text-decoration: none; color:black;">
-                <div class="project_el">
-                    <img src="https://i.ibb.co/TL6DRZj/quotes-website.png" width="300" height="150" style="border:black solid 1px;">
-                    <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Random Quotes Website</h1>
-                    <p>This website, programmed in Django, serves you a fresh random quote with every click of a button. </p>
-                    <p>It first scrapes data from 'quotes.toscrape.com' and then randomly picks one and parses it into a custom html template.</p>
-                </div>
-            </a>
-            <a href="https://github.com/bottleInALightning/Blocky" style="text-decoration: none; color:black;">
-                <div class="project_el">
-                    <img src="https://i.ibb.co/WpCPfbq/Kazam-screenshot-00001.png" width="300" height="150" style="border:black solid 1px;">
-                    <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Blocky</h1>
-                    <p>A game where you control a square snaking around the screen with either commands or wasd.</p>
-                    <p><b>Challenge:</b> Beat the every Level with the same set of instructions!</p>
-                </div> 
-            </a>
+        {% for project in pros%}
+        <a style="text-decoration: none; color:black;" href="{{project.github_link}}">
+            <div id="proj1" class="project_el">
+                <img src="{{project.img_link}}" width="{{project.img_width}}" height="{{project.img_height}}" style="border:black solid 1px;">
+                <h1 style=" margin-left:10px; margin-top:5px;padding-top:5px;display: inline-block; vertical-align: top;">{{project.title}}</h1>
+                <p style="font-size:20px;">{{project.text_content}}</p>
+                {% if request.user.is_staff %}
+                <form action="" method="POST"> {% csrf_token %}
+                    <input type="submit" name="delete_project" value="del">
+                    <input type="hidden" name="project_id" value="{{project.primary_key}}">
+                </form>
+                {% endif %}
+            </div>
 
-            <a href="https://github.com/bottleInALightning/pyWeek30" style="text-decoration: none; color:black;">
-                <div class="project_el">
-                    <img src="https://i.ibb.co/hfDJzy7/Cast-A-knife.png" width="200" height="150" style="border:black solid 1px;">
-                    <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Cast A Knife</h1>
-                    <p>This is a game made with pygame for pyweek</p>
-                    <p>You as the hero have to kill all the bugs and then find the trophy.</p>
-                </div>
-            </a>
+        </a>
 
-            <a href="https://github.com/bottleInALightning/RockPaperScissors" style="text-decoration: none; color:black;">
-                <div class="project_el">
-                    <img src="https://i.ibb.co/nRpRFwx/rock-paper-scissors.png" width="200" height="150" style="border:black solid 1px;">
-                    <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">Rock Paper Scissors</h1>
-                    <p>A small game I had a lot of fun doing (especially drawing)</p>
-                    <p>Done a long time ago though but has a cool, sneaky feature.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/bottleInALightning/Portfolio/tree/master" style="text-decoration: none; color:black;">
-                <div class="project_el">
-                    <img src="https://i.ibb.co/tcH4CKd/Screenshot-2020-10-26-Portfolio.png" width="200" height="150" style="border:black solid 1px;">
-                    <h1 style="display: inline-block; vertical-align: top; padding-left:10px;">This Website</h1>
-                    <p>I created this website because it was fun and in the end I learned a lot about web design.</p>
-                    <p>It's also cool, to be able to share a link to your website. lol</p>
-                </div>
-            </a>
-
+        {% endfor %}
+        
     </div>
+
+    {% if user.is_staff %}
+    <form action="" method="post" id="projects"> {% csrf_token %}
+        <label for="project_title" class="label_style">Title</label>
+        <input type="text" name="project_title"><br>
+
+        <label for="github_link" class="label_style">Github Link</label>
+        <input type="text" name="github_link"><br>
+
+        <label for="image_link" class="label_style">Image Link</label>
+        <input type="text" name="image_link">
+
+        <label for="image_width" class="label_style">Width</label>
+        <input style="width:50px;" type="text" name="image_width">
+
+        <label for="image_height" class="label_style">Height</label>
+        <input style="width:50px;" type="text" name="image_height"><br>
+        
+        <label for="text_field">Text</label><br>
+        <textarea name="text_field" cols="30" rows="10">Type here ...</textarea><br><br>
+
+        <input type="submit" name="create_project" value="Create New">
+    </form>
+    {% endif %}
     </div>
+    
 </body>
 </html>

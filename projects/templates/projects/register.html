@@ -81,7 +81,13 @@
             border-radius: 6px;
             border:1px solid rgb(202, 202, 202);
         }
+        #outer_email_auth{
+            margin:10px 30% 10px 30%;
+            
+        }
         body{
+
+        
             background-color: whitesmoke;
             margin:0px;
         }
@@ -112,7 +118,6 @@
     <nav id="nav_bar">
         <a id="nav_el" href="/site">Home</a>
         <a id="nav_el" href="/site/projects">Projects</a>
-        <a id="nav_el" href="/site/personal">Me</a>
         <a id="nav_el" href="/site/blog">Blog</a>
         <a id="nav_el" href="/site/comments">Comments</a>
         <a id="login_a" href="/site/login_page">Join</a>
@@ -150,13 +155,30 @@
             {%if account_created%}
             <p>Your account has been created successfully!</p>{% csrf_token%}
             {% endif %}
+
+        </form>
+    </div>
+
+    {% if not email_verified and user.is_authenticated %}
+    
+    <h2 id="outer_email_auth">Verify your email</h2>
+    <div id="login_style">       
+        
+        <!-- This part is the verify email part -->
+        
+        <form action="" method="post">{% csrf_token %}
+            <label for="email_auth_code" style="color: rgb(80, 80, 80);">Code</label><br>
+            <input type="text" name="email_auth_code" style="margin:10px 0px 5px 0px;" maxlength="6">
+            <input style="margin:0px 0px 10px 0px" type="submit" name="resend_code" value="Resend"><br>
+            <input type="submit" value="Verify Email">
             
         </form>
-
-    </div>
-    {%if user.is_authenticated%}
-    <h2 style="color:rebeccapurple;" >You are authenticated!</h2>
+        
+    </div> 
+    
     {% endif %}
+
+    
 </body>
 
 </html>

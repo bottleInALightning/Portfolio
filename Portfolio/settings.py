@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,13 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hcmi_4-f7ls77-mf&ud+$c#sz)1j1at--av$c%bedv*&f9t-k#axzk'
+SECRET_KEY = os.environ.get("DJANGO_PORTFOLIO_SECRET_KEY","")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0","217.80.241.170","larsprofile.zapto.org","lightningbottle.hopto.org","217.225.45.79","192.168.2.117","217.80.251.202"]
+ALLOWED_HOSTS = ["lightstack.zapto.org","0.0.0.0","217.80.230.166","217.80.241.170","larsprofile.zapto.org","lightningbottle.hopto.org","217.225.45.79","192.168.2.117","217.80.251.202"]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "lightstack.site@gmail.com"
+EMAIL_HOST_PASSWORD = os.environ.get("PORTFOLIO_EMAIL_PASSWORD","")
 
 # Application definition
 

@@ -114,7 +114,6 @@
     <nav id="nav_bar">
         <a id="nav_el" href="/site">Home</a>
         <a id="nav_el" href="/site/projects">Projects</a>
-        <a id="nav_el" href="/site/personal">Me</a>
         <a id="nav_el" href="/site/blog">Blog</a>
         <a id="nav_el" href="/site/comments">Comments</a>
         <a id="login_a" href="/site/login_page">Join</a>
@@ -149,9 +148,7 @@
         <a id="register_link" href="/site/login_page/logout" >Logout</a>
     </div>
     {% endif %}
-    {% if request.user.is_authenticated%}
-        <h1>authenticated</h1>
-    {% endif %}
+    
 </body>
 
 </html>

@@ -142,12 +142,32 @@
     <div id="page_contents">
     <div id="page_top">
     <h1 style="color:#E06060;font-size:90px;margin-top:30px;">Comments</h1> 
-    <p>You may write comments here and share your unwanted comments for others to cry over</p>
+    <p>You may write comments here and share your unwanted opinion for others to cry over</p>
     <div id="split_line1"></div>
+    {% if request.user.is_authenticated and email_verified %}
+    <div id="create_comment">
+        <form action="" method="POST">{% csrf_token%}
+            <label for="comment_text">Write Comment</label><br>
+            <input type="text" name="comment_text" value="">
+            <input type="submit" value="Send" >
+        </form>
+    </div>
+    {% elif not request.user.is_authenticated %}
+    <div>
+        <p style="padding-left:100px; margin-top: 40px; font-size: 20px; text-align: left;">You have to be logged in to write Comments</p>
+
+    </div>
+    {% elif not email_verified  %}
+    <div>
+        <p style="padding-left:100px; margin-top: 40px; font-size: 20px; text-align: left;">You have to verify your email to write Comments</p>
+
+    </div>
+    {% endif %}
     <div id="comment_section">
         
         {% for comment in comments%}
         <div class="comment">
+                
                 <h6 style="color:rgb(25, 89, 173);display:inline-block;">{{comment.author}}</h6>
                 <p id="comment_style">{{comment.text_content}}</p>
             
@@ -164,20 +184,7 @@
     
     </div>
     
-    {% if request.user.is_authenticated%}
-    <div id="create_comment">
-        <form action="" method="POST">{% csrf_token%}
-            <label for="comment_text">Write Comment</label><br>
-            <input type="text" name="comment_text" value="">
-            <input type="submit" value="Send">
-        </form>
-    </div>
-    {% else %}
-    <div>
-        <p style="padding-left:100px; margin-top: 40px; font-size: 25px; text-align: left;">You have to be logged in to write Comments</p>
-
-    </div>
-    {% endif %}
+    
     
 </div>
    
